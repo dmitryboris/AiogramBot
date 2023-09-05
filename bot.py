@@ -18,15 +18,6 @@ bot = Bot(token=os.getenv('TOKEN'))
 
 dp = Dispatcher()
 
-"""@dp.message(Command('start'))
-async def cmd_start(message: types.Message):
-    await message.answer("Hello!")"""
-
-
-@dp.message(Command('weather'))
-async def cmd_test1(message: types.Message):
-    await message.reply('Not bad')
-
 
 @dp.message(Command('start'))
 async def start(message: types.Message):
