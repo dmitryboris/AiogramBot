@@ -40,7 +40,7 @@ async def start(message: types.Message):
         resize_keyboard=True,
         input_field_placeholder='Choose your direction'
     )
-    await message.answer('Where are we going?')
+    await message.answer('Where are we going?', reply_markup=keyboard)
 
 
 async def main():
