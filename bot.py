@@ -43,14 +43,14 @@ async def start(message: types.Message):
     await message.answer('Where are we going?', reply_markup=keyboard)
 
 
-@dp.message(F.text.lower() == 'Left')
+@dp.message(F.text.lower() == 'left')
 async def go_left(message: types.Message):
-    await message.reply('Good choice!')
+    await message.reply('Good choice!', reply_markup=types.ReplyKeyboardRemove())
 
 
-@dp.message(F.text.lower() == 'Right')
+@dp.message(F.text.lower() == 'right')
 async def go_left(message: types.Message):
-    await message.reply('Awesome choice!')
+    await message.reply('Awesome choice!', reply_markup=types.ReplyKeyboardRemove())
 
 
 async def main():
