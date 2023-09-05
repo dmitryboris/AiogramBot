@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import os
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters.command import Command
 from aiologger.loggers.json import JsonLogger
 from dotenv import load_dotenv
@@ -41,6 +41,16 @@ async def start(message: types.Message):
         input_field_placeholder='Choose your direction'
     )
     await message.answer('Where are we going?', reply_markup=keyboard)
+
+
+@dp.message(F.text.lower() == 'Left')
+async def go_left(message: types.Message):
+    await message.reply('Good choice!')
+
+
+@dp.message(F.text.lower() == 'Right')
+async def go_left(message: types.Message):
+    await message.reply('Awesome choice!')
 
 
 async def main():
