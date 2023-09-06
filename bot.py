@@ -28,19 +28,26 @@ def get_keyboard(text: list):
             types.InlineKeyboardButton(text=text[0], callback_data=text[0]),
             types.InlineKeyboardButton(text=text[1], callback_data=text[1])
         ],
-        [types.InlineKeyboardButton(text=text[2], callback_data=text[2])]
+        [types.InlineKeyboardButton(text=text[2], callback_data=text[2])],
+        [types.InlineKeyboardButton(text='Back to main menu', callback_data='back')]
     ]
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
     return keyboard
 
 
 @dp.message(Command('start'))
-async def start(message: types.Message):
+@dp.callback_query(F.data == 'back')
+async def start(message: types.Message or types.CallbackQuery):
     text = ["PS+", "Game Pass", "EA Play"]
     kb = get_keyboard(text)
     image = FSInputFile('img/start.png')
-    res = await message.answer_photo(image, caption='Main menu', reply_markup=kb)
-    file_ids.append(res.photo[-1].file_id)
+    if type(message) == types.Message:
+        name = message.from_user.first_name
+        print(message.from_user)
+        res = await message.answer_photo(image, caption=f'Main menu. Hello, {name}!', reply_markup=kb)
+        file_ids.append(res.photo[-1].file_id)
+    else:
+        await message.message.answer_photo(image, caption='Main menu.', reply_markup=kb)
 
 
 @dp.callback_query(F.data == "PS+")
