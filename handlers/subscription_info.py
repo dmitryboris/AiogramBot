@@ -37,7 +37,7 @@ async def send_ps_plus_info(callback: types.CallbackQuery):
 @router.callback_query(F.data == "EA Play")
 async def send_ps_plus_info(callback: types.CallbackQuery):
     subscriptions = {
-        "EA Play": 100,
+        "EA Play+": 100,
         "EA Play Pro": 400
     }
     kb = sub_info(list(subscriptions.keys()))
