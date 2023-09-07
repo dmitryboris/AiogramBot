@@ -19,7 +19,6 @@ async def main():
     dp = Dispatcher()
     dp.include_routers(start.router, subscription_info.router, subscription.router)
 
-    file_ids = []
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
