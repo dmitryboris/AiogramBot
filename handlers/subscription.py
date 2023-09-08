@@ -9,7 +9,7 @@ subscriptions = {
     "Essential": 100,
     "Extra": 200,
     "Deluxe": 300,
-    "EA Play+": 100,
+    "EA Play Plus": 100,
     "EA Play Pro": 400,
     "PC": 100,
     "Console": 200,
@@ -19,8 +19,8 @@ subscriptions = {
 
 @router.callback_query(CallBackFilter(F.data))
 async def send_ps_sub(callback: types.CallbackQuery):
-    img = FSInputFile('img/ps.jpg')
-    # img = FSInputFile(f'img/{callback.data.lower()}.jpg')
+    # img = FSInputFile('img/ps.jpg')
+    img = FSInputFile(f'img/{callback.data.lower().replace(" ", "")}.jpg')
     text = f'{callback.data} - {subscriptions[callback.data]}'
     kb = payment_kb()
     await callback.message.answer_photo(img, caption=text, reply_markup=kb)
