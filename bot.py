@@ -5,6 +5,7 @@ from aiogram import Bot, Dispatcher
 from handlers import start, subscription_info, subscription
 from aiologger.loggers.json import JsonLogger
 from dotenv import load_dotenv, find_dotenv
+from data import db_session
 
 load_dotenv(find_dotenv())
 
@@ -15,7 +16,7 @@ async def main():
     )
 
     bot = Bot(token=os.getenv('TOKEN'))
-
+    db_session.global_init('db/tgbot.sqlite')
     dp = Dispatcher()
     dp.include_routers(start.router, subscription_info.router, subscription.router)
 
