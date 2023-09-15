@@ -10,5 +10,7 @@ class Subscription(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
+    order = relationship('Order', back_populates='subscription')
+
     def __repr__(self):
         return f'{self.name}'
