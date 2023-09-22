@@ -14,3 +14,10 @@ class User(SqlAlchemyBase):
 
     def __repr__(self):
         return f'{self.name}'
+
+
+def create_user(id, name):
+    user = User()
+    user.id = id
+    user.name = name
+    return user
