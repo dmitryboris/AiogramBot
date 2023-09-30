@@ -6,6 +6,7 @@ from handlers import start, subscription_info, subscription
 from aiologger.loggers.json import JsonLogger
 from dotenv import load_dotenv, find_dotenv
 from aiogram.types import menu_button_commands
+from data import db_session
 
 load_dotenv(find_dotenv())
 
@@ -16,6 +17,8 @@ async def main():
     )
 
     bot = Bot(token=os.getenv('TOKEN'), disable_web_page_preview=True)
+
+    await db_session.global_init('db/bot.sqlite')
 
     description = 'You can buy subscriptions on gaming services. Such as PS+, GamePass and EA PLay'
     await bot.set_my_description(description=description)
