@@ -2,7 +2,7 @@ import asyncio
 import logging
 import os
 from aiogram import Bot, Dispatcher
-from handlers import start, subscription_info, subscription
+from handlers import start, subscription_info, subscription, cabinet
 from aiologger.loggers.json import JsonLogger
 from dotenv import load_dotenv, find_dotenv
 from aiogram.types import menu_button_commands
@@ -27,7 +27,7 @@ async def main():
     await bot.set_chat_menu_button(menu_button=b)
 
     dp = Dispatcher()
-    dp.include_routers(start.router, subscription_info.router, subscription.router)
+    dp.include_routers(start.router, cabinet.router, subscription_info.router, subscription.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
