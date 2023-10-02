@@ -15,6 +15,5 @@ async def start(callback: types.CallbackQuery):
     builder.row(InlineKeyboardButton(text='Back to main menu', callback_data='back'))
     image = FSInputFile('img/start.png')
     info = await get_user(callback.from_user.id)
-    print(info)
     caption = ('Cabinet' + '\n' + f'Name: {info[1]}' + '\n' + f'Count of orders: {info[2]}')
     await callback.message.answer_photo(image, caption=caption, reply_markup=builder.as_markup())
