@@ -1,33 +1,33 @@
 import aiosqlite
 
 subscriptions = {
-    "Essential": 100,
-    "Extra": 200,
-    "Deluxe": 300,
-    "EA Play Plus": 100,
-    "EA Play Pro": 400,
-    "PC": 100,
-    "Console": 200,
-    "Ultimate": 400
+    "Essential": [100, "PS"],
+    "Extra": [200, "PS"],
+    "Deluxe": [300, "PS"],
+    "EA Play Plus": [100, "EA"],
+    "EA Play Pro": [400, "EA"],
+    "PC": [100, "XBOX"],
+    "Console": [200, "XBOX"],
+    "Ultimate": [400, "XBOX"]
 }
 
 
 async def add_user(id: int, name: str):
     async with aiosqlite.connect('db/bot.sqlite') as db:
         await db.execute(
-            f'INSERT INTO users(id, name, count_of_orders) VALUES (?, ?, ?)',
+            'INSERT INTO users(id, name, count_of_orders) VALUES (?, ?, ?)',
             (id, name, 0)
         )
         await db.commit()
 
 
 async def add_subscriptions():
-    parameters = ((key, items[0], items[1]) for key, items in enumerate(subscriptions.items()))
     async with aiosqlite.connect('db/bot.sqlite') as db:
         for key, items in enumerate(subscriptions.items()):
-            name, cost = items
+            name, values = items
+            cost, own = values
             await db.execute(
-                'INSERT INTO subscriptions(id, name, cost) VALUES (?, ?, ?)',
-                (key, name, cost)
+                'INSERT INTO subscriptions(id, name, cost, own) VALUES (?, ?, ?, ?)',
+                (key, name, cost, own)
             )
         await db.commit()

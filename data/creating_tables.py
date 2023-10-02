@@ -29,7 +29,8 @@ async def create_subscription_table(db_file: str):
         await db.execute('CREATE TABLE IF NOT EXISTS subscriptions'
                          '(id INTEGER PRIMARY KEY AUTOINCREMENT,'
                          'name TEXT NOT NULL,'
-                         'cost INTEGER)')
+                         'cost INTEGER,'
+                         'own TEXT NOT NULL)')
         await db.commit()
     subs = await get_subscriptions()
     if len(subs.keys()) == 0:

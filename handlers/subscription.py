@@ -6,17 +6,6 @@ from data.get_info import get_subscriptions
 
 router = Router()
 
-"""subscriptions = {
-    "Essential": 100,
-    "Extra": 200,
-    "Deluxe": 300,
-    "EA Play Plus": 100,
-    "EA Play Pro": 400,
-    "PC": 100,
-    "Console": 200,
-    "Ultimate": 400
-}"""
-
 
 @router.callback_query(CallBackFilter(F.data))
 async def send_ps_sub(callback: types.CallbackQuery):
