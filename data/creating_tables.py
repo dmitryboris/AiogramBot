@@ -16,7 +16,7 @@ async def create_user_table(db_file: str):
 async def create_order_table(db_file: str):
     async with aiosqlite.connect(db_file) as db:
         await db.execute('CREATE TABLE IF NOT EXISTS orders'
-                         '(id INTEGER PRIMARY KEY,'
+                         '(id INTEGER PRIMARY KEY AUTOINCREMENT,'
                          'user_id INTEGER,'
                          'sub_id INTEGER,'
                          'FOREIGN KEY (user_id) REFERENCES users (id),'

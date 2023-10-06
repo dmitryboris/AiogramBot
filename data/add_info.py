@@ -31,3 +31,21 @@ async def add_subscriptions():
                 (key, name, cost, own)
             )
         await db.commit()
+
+
+async def add_order(user_id: int, sub_id: int):
+    async with aiosqlite.connect('db/bot.sqlite') as db:
+        await db.execute(
+            'INSERT INTO orders(user_id, sub_id) VALUES (?, ?)',
+            (user_id, sub_id)
+        )
+        await db.commit()
+
+
+async def update_counter(user_id: int):
+    async with aiosqlite.connect('db/bot.sqlite') as db:
+        await db.execute(
+            'UPDATE users SET count_of_orders = count_of_orders + ? WHERE id = ?',
+            (1, user_id,)
+        )
+        await db.commit()
