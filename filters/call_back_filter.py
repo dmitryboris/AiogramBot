@@ -6,7 +6,6 @@ from data.get_info import get_subscriptions
 async def get_names():
     subscriptions = await get_subscriptions()
     names = list(subscriptions.keys())
-    print(names)
     return names
 
 
