@@ -1,9 +1,12 @@
 from aiogram import Router, F, types
 from aiogram.filters.command import Command
 from aiogram.types import FSInputFile
+
 from keyboards.start_kb import start_kb
-from data import db_session
-from data.user import User, create_user
+from data.add_info import add_user
+from data.get_info import get_user
+
+
 router = Router()
 
 
@@ -15,13 +18,10 @@ async def start(message: types.Message or types.CallbackQuery):
     if type(message) == types.Message:
         name = message.from_user.first_name
         print(message.from_user)
-        db_sess = db_session.create_session()
-        user_id = message.from_user.id
-
-        if not db_sess.query(User).filter(User.id == user_id).first():
-            db_sess.add(create_user(user_id, name))
-        db_sess.commit()
-        res = await message.answer_photo(image, caption=f'Main menu. Hello, {name}!', reply_markup=keyboard)
+        user = await get_user(message.from_user.id)
+        if not user:
+            await add_user(message.from_user.id, message.from_user.first_name)
+        res = await message.answer_photo(image, caption=f'Main menu. Hello, {name}!', reply_markup=keyboard,)
         # file_ids.append(res.photo[-1].file_id)
     else:
         await message.message.answer_photo(image, caption='Main menu.', reply_markup=keyboard)

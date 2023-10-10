@@ -10,4 +10,5 @@ def start_kb() -> InlineKeyboardMarkup:
         InlineKeyboardButton(text=text[1], callback_data=text[1])
     )
     builder.row(InlineKeyboardButton(text=text[2], callback_data=text[2]))
+    builder.row(InlineKeyboardButton(text=' Your cabinet', callback_data='cabinet'))
     return builder.as_markup()

@@ -1,7 +1,12 @@
 from aiogram.filters import BaseFilter
 from aiogram.types import Message
+from data.get_info import get_subscriptions
 
-subscriptions = ["Essential", "Extra", "Deluxe", "PC", "Console", "Ultimate", "EA Play+", "EA Play Pro"]
+
+async def get_names():
+    subscriptions = await get_subscriptions()
+    names = list(subscriptions.keys())
+    return names
 
 
 class CallBackFilter(BaseFilter):
@@ -9,4 +14,4 @@ class CallBackFilter(BaseFilter):
         self.text = text
 
     async def __call__(self, message: Message) -> bool:
-        return self.text in subscriptions
+        return self.text in await get_names()
