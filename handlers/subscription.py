@@ -13,7 +13,7 @@ router = Router()
 async def send_ps_sub(callback: types.CallbackQuery, state: FSMContext):
     subscriptions = await get_subscriptions()
     img = FSInputFile(f'img/{callback.data.lower().replace(" ", "")}.jpg')
-    text = f'{callback.data} - {subscriptions[callback.data]}'
+    text = f'{callback.data} - {subscriptions[callback.data]}$'
     builder = payment_kb()
     builder.row(InlineKeyboardButton(text='Pay', callback_data='paid'))
     await callback.message.answer_photo(img, caption=text, reply_markup=builder.as_markup())

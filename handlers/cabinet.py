@@ -16,4 +16,4 @@ async def start(callback: types.CallbackQuery):
     image = FSInputFile('img/start.png')
     info = await get_user(callback.from_user.id)
     caption = ('Cabinet' + '\n' + f'Name: {info[1]}' + '\n' + f'Count of orders: {info[2]}')
-    await callback.message.answer_photo(image, caption=caption, reply_markup=builder.as_markup())
+    await callback.message.edit_caption(caption=caption, reply_markup=builder.as_markup())
